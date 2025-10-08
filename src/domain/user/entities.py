@@ -28,7 +28,7 @@ class UserAggregate(BaseAggregate):
     id: UserIdValue
     full_name: UserFullNameValue
     email: UserEmailValue
-    user_roles: UserRole
+    role: UserRole
     hashed_password: UserHashPasswordValue
     _hashed_password_history: OrderedLifoSet[UserHashPasswordValue] = field(default_factory=OrderedLifoSet)
 
@@ -63,6 +63,12 @@ class UserAggregate(BaseAggregate):
                 new_email=new_email
             )
         )
+
+    def change_role(self, new_role: UserRole) -> None:
+        self.role = new_role
+
+    def change_fullname(self, new_full_name: UserFullNameValue) -> None:
+        self.full_name = new_full_name
 
     def get_password_history(self) -> OrderedLifoSet[UserHashPasswordValue]:
         return self._hashed_password_history

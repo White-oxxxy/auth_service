@@ -1,4 +1,7 @@
+from uuid_utils import UUID
+
 from domain.common.factory import IBaseValuesFactory
+from domain.user.enums import UserRole
 from domain.user.value_objects import (
     UserEmailValue,
     UserSurnameValue,
@@ -7,13 +10,26 @@ from domain.user.value_objects import (
     UserFullNameValue,
     UserHashPasswordValue,
     UserRawPasswordValue,
+    UserIdValue,
 )
 
 
 class UserValueFactory(IBaseValuesFactory):
     @staticmethod
+    def create_id_value(user_id: UUID) -> UserIdValue:
+        value = UserIdValue(value=user_id)
+
+        return value
+
+    @staticmethod
     def create_email_value(email: str) -> UserEmailValue:
         value = UserEmailValue(value=email)
+
+        return value
+
+    @staticmethod
+    def create_role_value(role: str) -> UserRole:
+        value = UserRole(role)
 
         return value
 

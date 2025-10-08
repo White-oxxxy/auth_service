@@ -14,5 +14,9 @@ class BusinessRuleValidationMixin:
     @staticmethod
     def __validate_rule(rule: BaseBusinessRule) -> None:
         if rule.is_broken():
-
             raise BusinessRuleValidationException(rule=rule)
+
+
+def check_rule(rule: BaseBusinessRule):
+    if rule.is_broken():
+        raise BusinessRuleValidationException(rule=rule)
