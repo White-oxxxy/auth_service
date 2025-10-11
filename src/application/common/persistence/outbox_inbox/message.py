@@ -4,6 +4,7 @@ from datetime import (
     timezone,
 )
 from enum import Enum
+from uuid_utils import UUID
 
 from application.common.event import BaseIntegrationEvent
 
@@ -17,6 +18,7 @@ class MessageStatus(str, Enum):
 
 @dataclass
 class Message:
+    id: UUID
     event: BaseIntegrationEvent
     status: MessageStatus = MessageStatus.PENDING
     sender: str | None = None
